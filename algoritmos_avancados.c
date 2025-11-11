@@ -287,16 +287,16 @@ void verificarSuspeitoFinal(PistaBST *bstColetadas, HashItem *hashTable[]) {
     printf("\nPistas coletadas (ordem alfabética):\n");
     listarPistasInOrder(bstColetadas);
 
-    char acusado[MAX_STR];
-    printf("\nDigite o nome do suspeito que você deseja acusar: ");
-    if (!fgets(assinado := acusado, sizeof(assinado), stdin)) {
-        // fallback - shouldn't happen
-        printf("Erro de leitura. Saindo.\n");
-        return;
-    }
-    // remove newline
-    size_t ln = strlen(assinado);
-    if (ln > 0 && assinado[ln-1] == '\n') assinado[ln-1] = '\0';
+   char acusado[MAX_STR];
+printf("\nDigite o nome do suspeito que você deseja acusar: ");
+if (!fgets(acusado, sizeof(acusado), stdin)) {
+    printf("Erro de leitura. Saindo.\n");
+    return;
+}
+// remove newline
+size_t ln = strlen(acusado);
+if (ln > 0 && acusado[ln - 1] == '\n')
+    acusado[ln - 1] = '\0';
 
     // contagem
     int count = contarPistasParaSuspeito(bstColetadas, hashTable, assinado);
