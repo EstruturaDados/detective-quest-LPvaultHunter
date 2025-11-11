@@ -287,28 +287,29 @@ void verificarSuspeitoFinal(PistaBST *bstColetadas, HashItem *hashTable[]) {
     printf("\nPistas coletadas (ordem alfabética):\n");
     listarPistasInOrder(bstColetadas);
 
-   char acusado[MAX_STR];
-printf("\nDigite o nome do suspeito que você deseja acusar: ");
-if (!fgets(acusado, sizeof(acusado), stdin)) {
-    printf("Erro de leitura. Saindo.\n");
-    return;
-}
-// remove newline
-size_t ln = strlen(acusado);
-if (ln > 0 && acusado[ln - 1] == '\n')
-    acusado[ln - 1] = '\0';
+    char acusado[MAX_STR];
+    printf("\nDigite o nome do suspeito que você deseja acusar: ");
+    if (!fgets(acusado, sizeof(acusado), stdin)) {
+        printf("Erro de leitura. Saindo.\n");
+        return;
+    }
+    // remove newline
+    size_t ln = strlen(acusado);
+    if (ln > 0 && acusado[ln - 1] == '\n')
+        acusado[ln - 1] = '\0';
 
     // contagem
-    int count = contarPistasParaSuspeito(bstColetadas, hashTable, assinado);
+    int count = contarPistasParaSuspeito(bstColetadas, hashTable, acusado);
 
-    printf("\nPistas que vinculam \"%s\": %d\n", assinado, count);
+    printf("\nPistas que vinculam \"%s\": %d\n", acusado, count);
 
     if (count >= 2) {
-        printf("\nVEREDICTO: Acusação sustentada! Há evidências suficientes para culpar %s.\n", assinado);
+        printf("\nVEREDICTO: Acusação sustentada! Há evidências suficientes para culpar %s.\n", acusado);
     } else {
         printf("\nVEREDICTO: Acusação FRACA. Apenas %d pista(s) suportam a acusação — são necessárias pelo menos 2.\n", count);
     }
 }
+
 
 /* Funções de liberação de memória */
 void liberarBST(PistaBST *raiz) {
